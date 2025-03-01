@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación de Boda - Nancy & Julio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f5f0;
+      color: #5a5a5a;
+      text-align: center;
+      padding: 20px;
+    }
+    .invitation-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .section-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: #c49a6c;
+      margin-bottom: 10px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .primary { background-color: #c49a6c; color: white; }
+    .secondary { background-color: #ccc; color: #333; }
+    .message { margin-top: 15px; font-style: italic; color: #c49a6c; }
+  </style>
+</head>
+<body>
+  <!-- Música de fondo -->
+  <audio autoplay loop>
+    <source src="https://www.mfiles.co.uk/mp3-downloads/Truly-Madly-Deeply.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="container">
+    <!-- Mensaje Inicial -->
+    <section class="section-title">
+        <h1>  
+            ¡Nos casamos!
+        </h1>                        
+        <h4>Nancy & Julio</h4>
+    </section>
+
+    <!-- Segundo Mensaje -->
+    <section class="reveal">
+      <p>Estas invitado 🎉 </p>
+     Vamos a cumplir nuestro siguiente y más grande sueño, unir nuestras vidas frente a Dios, así que queremos que estés allí con nosotros 🤍 </p>
+    </section>
+
+    <!-- Foto de los novios -->
+    <section class="reveal">
+        <img src="foto.jpg" width="500" height="500" />
+    </section>
+
+    <!-- Tercer Mensaje: Información y bendiciones -->
+    <section class="reveal">
+      <h3>Con la bendición de Dios y nuestros padres 🙏🏻</h3>
+      <p><strong>👰🏻‍♀️ Padres de la novia:</strong> Julieta Ramírez Chávez & César Castro González</p>
+      <p><strong>🤵🏻 Padres del novio:</strong> Martiniana Ruelas Juárez & Adolfo Ducoing Ramírez</p>
+    </section>
+
+   <!-- Información de la Boda con foto de la iglesia -->
+   <section class="reveal info-boda">
+    <div class="boda-container">
+      <div class="detalle-boda">
+        <h3>Nuestra boda</h3>
+        <p><strong>Fecha:</strong> Sábado, 30.08.2025</p>
+        <p><strong>Lugar:</strong> Quinta Las Águilas</p>
+        <p><strong>Dirección:</strong> Calle La Garita 12, Coacalco, 55700 San Francisco Coacalco, Méx.</p>
+        <p><strong>Hora de la ceremonia religiosa:</strong> 6:00 p.m. - 7:00 p.m.</p>
+        <a href="https://maps.app.goo.gl/9RJmme9Vhmuwr3P7A?g_st=com.google.maps.preview.copy" 
+        target="_blank" class="button primary">
+        Ver Ubicación
+     </a>
+      </div>
+    </div>
+  </section>
+  
+  <div>
+    <!-- Cuarto Mensaje: Confirmación de asistencia -->
+  <section class="reveal">
+    <h3>Confirma tu asistencia ✅👇 </h3>
+    <div class="confirmation">
+      <!-- Botón de "Sí, asistiré" -->
+      <button class="button primary" onclick="window.location.href='confirmacion.html'">¡Sí, asistiré! 🎉</button>      
+      
+      <!-- Botón de "No podré asistir" -->
+      <button class="button secondary" onclick="confirmAttendance(false)">No podré asistir 💔</button>
+    </div>
+    <!-- Espacio para mostrar el mensaje si el usuario no puede asistir -->
+    <p id="confirmation-message" class="message"></p>
+  </section>
+  </div>
+
+<!-- Firma -->
+<section class="reveal">
+    <div class="footer">
+      <p>Con amor,</p>
+      <h2>Nancy & Julio</h2>
+    </div>
+  </section>
+</div>
+
+  <script>
+    function confirmAttendance(isAttending) {
+      let message = document.getElementById("confirmation-message");
+      if (isAttending) {
+        message.innerHTML = "¡Gracias por acompañarnos en este día tan especial! Nos llena de alegría saber que compartirás nuestra felicidad. 💕🥂";
+      } else {
+        message.innerHTML = "Entendemos que no puedas asistir, pero te llevaremos en nuestro corazón en este día tan especial. ¡Gracias por tu cariño! ❤️";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmación de Asistencia - Nancy & Julio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f5f0;
+      color: #5a5a5a;
+      text-align: center;
+      padding: 20px;
+    }
+    .invitation-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .section-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: #c49a6c;
+      margin-bottom: 10px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    .primary { background-color: #c49a6c; color: white; }
+    .secondary { background-color: #ccc; color: #333; }
+    .message { margin-top: 15px; font-style: italic; color: #c49a6c; }
+  </style>
+  </style>
+</head>
+<body>
+  <div class="invitation-container">
+    <h1 class="section-title">Nancy & Julio</h1>
+    <p>Nos complace invitarte a nuestra boda y compartir este día tan especial contigo.</p>
+    <section>
+      <h3 class="section-title">Confirma tu asistencia</h3>
+      <form id="attendance-form">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" class="form-input" required>
+        <label for="guests">Número de asistentes:</label>
+        <input type="number" id="guests" name="guests" class="form-input" min="1" max="5" required>
+        <button type="submit" class="button primary">¡Confirma tu asistencia!</button>
+        <button type="button" onclick="pedirContraseña()" class="button secondary">Descargar Lista</button>
+      </form>
+      <p id="confirmation-message" class="message"></p>
+    </section>
+  </div>
+
+  <script>
+    document.getElementById("attendance-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      let name = document.getElementById("name").value;
+      let guests = parseInt(document.getElementById("guests").value);
+      let message = document.getElementById("confirmation-message");
+
+      let confirmations = JSON.parse(localStorage.getItem("confirmations")) || [];
+      confirmations.push({ name, guests });
+      localStorage.setItem("confirmations", JSON.stringify(confirmations));
+
+      message.innerHTML = `✨ ¡Gracias por confirmar, ${name}!<br> Nos vemos pronto. 💖`;
+      message.style.color = "#c49a6c";
+    });
+
+    function pedirContraseña() {
+      let contraseñaCorrecta = "jacky"; // Cambia esto por la contraseña que desees
+      let contraseñaIngresada = prompt("Acceso solo de los bobiooos");
+      if (contraseñaIngresada === contraseñaCorrecta) {
+        descargarLista();
+      } else {
+        alert("Contraseña incorrecta. No tienes acceso para descargar la lista.");
+      }
+    }
+
+    function descargarLista() {
+      let confirmations = JSON.parse(localStorage.getItem("confirmations")) || [];
+      if (confirmations.length === 0) {
+        alert("Aún no hay confirmados.");
+        return;
+      }
+      
+      let { jsPDF } = window.jspdf;
+      let doc = new jsPDF();
+      doc.setFontSize(14);
+      doc.text("Lista de Confirmados", 10, 10);
+      let y = 20;
+      confirmations.forEach((c, index) => {
+        doc.text(`${index + 1}. ${c.name} - ${c.guests} invitados`, 10, y);
+        y += 10;
+      });
+      doc.save("confirmados.pdf");
+    }
+  </script>
+</body>
+</html>
